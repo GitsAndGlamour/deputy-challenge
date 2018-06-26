@@ -10,3 +10,58 @@
   margin-top: -20px;
   margin-left: -15px;
 }
+
+#auth-form {
+  margin: 1.5rem 37%;
+  padding: 1rem;
+  width: 25%;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px lightgray;
+  display: flex;
+  flex-direction: column;
+}
+
+.float-right {
+  float: right;
+
+}
+
+.label-link {
+  color: #3caac4 !important;
+}
+
+.label-link:hover {
+  color: darkorange !important;
+  text-decoration: none;
+}
+
+.alt-login-label {
+  text-align: center;
+  padding: 0.5rem;
+  border-bottom: 1.5px solid rgba(0,0,0,0.05);
+  width: 100%;
+}
+
+.larger-font {
+  font-size: 14px;
+}
+
+.btn-group-sm {
+  display: flex;
+}
+
+.btn-group-sm button {
+  flex-grow: 2;
+  margin-top: 1.5rem;
+  color: white;
+}
+
+.btn-facebook {
+  margin-right: 0.25rem;
+  background-color: #304A88;
+}
+.btn-google {
+  margin-left: 0.25rem;
+  background-color: #307ADC;
+}

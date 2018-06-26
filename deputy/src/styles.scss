@@ -1,3 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import 'theme.scss';
+$md-deputy-50 : #e0f4fb;
+$md-deputy-100 : #b3e3f6;
+$md-deputy-200 : #80d0f0;
+$md-deputy-300 : #4dbde9;
+$md-deputy-400 : #26aee5;
+$md-deputy-500 : #00a0e0;
+$md-deputy-600 : #0098dc;
+$md-deputy-700 : #008ed8;
+$md-deputy-800 : #0084d3;
+$md-deputy-900 : #0073cb;
+$md-deputy-A100 : #f3f9ff;
+$md-deputy-A200 : #c0e0ff;
+$md-deputy-A400 : #8dc7ff;
+$md-deputy-A700 : #74bbff;
+$md-deputy-contrast-50 : #000000;
+$md-deputy-contrast-100 : #000000;
+$md-deputy-contrast-200 : #000000;
+$md-deputy-contrast-300 : #000000;
+$md-deputy-contrast-400 : #000000;
+$md-deputy-contrast-500 : #ffffff;
+$md-deputy-contrast-600 : #ffffff;
+$md-deputy-contrast-700 : #ffffff;
+$md-deputy-contrast-800 : #ffffff;
+$md-deputy-contrast-900 : #ffffff;
+$md-deputy-contrast-A100 : #000000;
+$md-deputy-contrast-A200 : #000000;
+$md-deputy-contrast-A400 : #000000;
+$md-deputy-contrast-A700 : #000000;
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+.btn-primary {
+  background-color: $md-deputy-500 !important;
+}
+.btn-primary:hover {
+  background-color: $md-deputy-700 !important;
+}
