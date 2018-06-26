@@ -1,0 +1,12 @@
+#logo-icon {
+  height: 50px;
+  z-index: 1;
+  margin-top: 5px;
+}
+
+#logo-text {
+  height: 40px;
+  z-index: 0;
+  margin-top: -20px;
+  margin-left: -15px;
+}
