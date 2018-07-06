@@ -2,15 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
-    MatButtonModule,
-    MatCheckboxModule,
-    MatToolbarModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    MatProgressSpinnerModule,
-    MatProgressBarModule,
-    MatSnackBarModule
+  MatButtonModule,
+  MatCheckboxModule,
+  MatToolbarModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatIconModule,
+  MatProgressSpinnerModule,
+  MatProgressBarModule,
+  MatSnackBarModule, MatTableModule
 } from '@angular/material';
 
 
@@ -27,7 +27,8 @@ import {
       MatProgressBarModule,
       ReactiveFormsModule,
       FormsModule,
-      MatSnackBarModule
+      MatSnackBarModule,
+      MatTableModule
   ],
   exports: [
       MatButtonModule,
@@ -40,7 +41,8 @@ import {
       MatProgressBarModule,
       ReactiveFormsModule,
       FormsModule,
-      MatSnackBarModule
+      MatSnackBarModule,
+      MatTableModule
   ],
   declarations: []
 })
