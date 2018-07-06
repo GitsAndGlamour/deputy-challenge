@@ -7,12 +7,14 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { QuestionOneComponent } from './question-one/question-one.component';
 import { QuestionTwoComponent } from './question-two/question-two.component';
 import {HttpClientModule} from "@angular/common/http";
+import { QuestionThreeComponent } from './question-three/question-three.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     QuestionOneComponent,
     QuestionTwoComponent,
+    QuestionThreeComponent,
   ],
   imports: [
     NgbModule.forRoot(),
