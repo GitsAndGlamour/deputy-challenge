@@ -10,7 +10,7 @@ import {
   MatIconModule,
   MatProgressSpinnerModule,
   MatProgressBarModule,
-  MatSnackBarModule, MatTableModule
+  MatSnackBarModule, MatTableModule, MatDatepickerModule, MatNativeDateModule
 } from '@angular/material';
 
 
@@ -28,7 +28,9 @@ import {
       ReactiveFormsModule,
       FormsModule,
       MatSnackBarModule,
-      MatTableModule
+      MatTableModule,
+      MatDatepickerModule,
+      MatNativeDateModule
   ],
   exports: [
       MatButtonModule,
@@ -42,7 +44,9 @@ import {
       ReactiveFormsModule,
       FormsModule,
       MatSnackBarModule,
-      MatTableModule
+      MatTableModule,
+      MatDatepickerModule,
+      MatNativeDateModule
   ],
   declarations: []
 })

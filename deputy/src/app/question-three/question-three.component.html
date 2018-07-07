@@ -1,3 +1,73 @@
-<p>
-  question-three works!
-</p>
+<div id="scheduling-tab">
+  <div id="scheduling-header">
+    <h1>Scheduling</h1>
+    <div class="middle-line-container">
+      <div class="middle-line"></div>
+    </div>
+  </div>
+  <div class="employee-form">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+      <mat-form-field>
+        <input matInput name="Employee" type="number" ngModel #employee="ngModel" placeholder="Employee (Ex. 1)" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput name="Department" type="number" ngModel #department="ngModel" placeholder="Department (Ex. 2)" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput name="startDate" ngModel #startDate [matDatepicker]="dpStart" placeholder="Start Date" required>
+        <mat-datepicker-toggle matSuffix [for]="dpStart"></mat-datepicker-toggle>
+        <mat-datepicker #dpStart></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <input name="startTime" ngModel #startTime="ngModel" matInput placeholder="Start Time (Ex. 7:00)" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput name="endDate" ngModel #endDate [matDatepicker]="dpEnd" placeholder="End Date" required>
+        <mat-datepicker-toggle matSuffix [for]="dpEnd"></mat-datepicker-toggle>
+        <mat-datepicker #dpEnd></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <input name="endTime" ngModel #endTime="ngModel" matInput placeholder="End Time (Ex. 23:00)" required>
+      </mat-form-field>
+      <button id="submit" mat-raised-button color="primary">Submit</button>
+    </form>
+  </div>
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+    <!-- Employee Column -->
+    <ng-container matColumnDef="employee">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Employee </th>
+      <td mat-cell *matCellDef="let schedule"> {{schedule.Employee}} </td>
+    </ng-container>
+
+    <!-- Departmant Column -->
+    <ng-container matColumnDef="department">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Department </th>
+      <td mat-cell *matCellDef="let schedule"> {{schedule.Department}} </td>
+    </ng-container>
+
+    <!-- Start Column -->
+    <ng-container matColumnDef="start">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Start </th>
+      <td mat-cell *matCellDef="let schedule">{{schedule.StartTime.toString().substring(0,24)}}</td>
+    </ng-container>
+
+    <!-- End Column -->
+    <ng-container matColumnDef="end">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> End </th>
+      <td mat-cell *matCellDef="let schedule">{{schedule.EndTime.toString().substring(0,24)}}</td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
+      <td mat-cell *matCellDef="let schedule">
+        <button mat-raised-button color="primary">Edit</button>
+        <button mat-raised-button color="warn" (click)="delete(schedule)">Delete</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

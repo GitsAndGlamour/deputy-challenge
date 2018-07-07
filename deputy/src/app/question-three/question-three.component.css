@@ -1,0 +1,68 @@
+#scheduling-header {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+#scheduling-header h1 {
+  color: #676767;
+  font-weight: 500;
+}
+
+.mat-row:nth-of-type(2n) {
+  background-color: #f9f9f9 !important;
+}
+
+.mat-column-actions button {
+  float: right;
+  margin: 5px;
+}
+
+.mat-column-actions {
+  text-align: right;
+}
+
+th.mat-header-cell:last-child {
+  padding-right: 90px;
+}
+
+#scheduling-header .middle-line-container{
+  flex: 1 1 auto;
+}
+
+.middle-line {
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  margin-top: 25px;
+  margin-left: 2.5%;
+  width: 95%;
+}
+
+.mat-header-row th:first-of-type, th:last-of-type {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.mat-header-row {
+  background-color: rgb(237, 237, 237);
+}
+
+.mat-header-cell {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+#scheduling-tab {
+  padding: 1rem;
+}
+
+table {
+  width: 100%;
+}
+
+form {
+  display: flex;
+  justify-content: space-between;
+}
+
+#submit {
+  max-height: 40px;
+}
