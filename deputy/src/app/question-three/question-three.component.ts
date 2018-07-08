@@ -1,8 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl, NgForm} from "@angular/forms";
-import {EmployeeTableData, UserData} from "../data";
+import {DepartmentData, ScheduleTableData, UserData} from "../data";
 import {MatSnackBar, MatSort, MatTableDataSource} from "@angular/material";
-import {Time} from "@angular/common";
+import {DataService} from "../data.service";
+// import {Moment} from "moment";
 
 
 @Component({
@@ -14,40 +15,60 @@ export class QuestionThreeComponent implements OnInit {
   dateStart: FormControl;
   dateEnd: FormControl;
 
-  tableData: EmployeeTableData[] = [];
+  tableData: ScheduleTableData[] = [];
   displayedColumns: string[] = ['employee', 'department', 'start', 'end', 'actions'];
-  dataSource: MatTableDataSource<EmployeeTableData>;
+  dataSource: MatTableDataSource<ScheduleTableData>;
   rows: number = 0;
+  schedules: ScheduleTableData[] = [];
   employee: number;
   department: number;
   startDate: string;
-  startTime: string;
   endDate: string;
-  endTime: string;
   snackbar: MatSnackBar;
   @ViewChild(MatSort) sort: MatSort;
-  constructor(snackbar: MatSnackBar) {
+  constructor(snackbar: MatSnackBar, private dataservice: DataService) {
     this.snackbar = snackbar;
   }
 
   ngOnInit() {
     this.dateStart = new FormControl(new Date());
     this.dateEnd = new FormControl(new Date());
-    this.dataSource = new MatTableDataSource(this.tableData);
-    this.dataSource.sort = this.sort;
+    this.refreshDataSource(this.tableData);
+    this.dataservice.getAllEntities('schedules').subscribe((schedules: ScheduleTableData[]) => {
+      schedules.forEach(schedule => {
+        schedule.StartTime = new Date(schedule.StartTime);
+        schedule.EndTime = new Date(schedule.EndTime);
+      });
+
+    this.rows = schedules.length;
+    this.tableData = schedules;
+    this.refreshDataSource(this.tableData);
+    });
   }
 
-  onSubmit(f: NgForm) {
+  onSubmit(f: NgForm, event) {
+    event.preventDefault();
+    event.stopPropagation();
     if (this.validateForm(f)) {
       const startTime = new Date (f.value.startDate.toString().substring(0, 15) + ' ' + f.value.startTime);
       const endTime = new Date (f.value.endDate.toString().substring(0, 15) + ' ' + f.value.endTime);
       f.value.StartTime = startTime;
       f.value.EndTime = endTime;
       f.value.Id = ++this.rows;
-      let data = new EmployeeTableData();
+      let data = new ScheduleTableData();
       data.serialize(f.value);
       if (this.compareExistingTimes(data)) {
-        this.tableData.push(data);
+        this.dataservice.getEntityById('users', data.Id).subscribe((user: UserData) => {
+          data.EmployeeName = user.DisplayName;
+          this.dataservice.getEntityById('departments', data.Department).subscribe((department: DepartmentData) => {
+            data.DepartmentName = department.Name;
+            let postSuccess = false;
+            this.dataservice.addEntity('schedules', data).subscribe(value => {
+              postSuccess = value;
+            });
+          });
+        });
+        this.tableData.unshift(data);
         this.dataSource = new MatTableDataSource(this.tableData);
         this.dataSource.sort = this.sort;
       } else {
@@ -56,9 +77,9 @@ export class QuestionThreeComponent implements OnInit {
     }
   }
 
-  compareExistingTimes(form: EmployeeTableData): boolean {
+  compareExistingTimes(form: ScheduleTableData): boolean {
     let isValid = true;
-    this.tableData.forEach((row: EmployeeTableData) => {
+    this.tableData.forEach((row: ScheduleTableData) => {
       if (row.Employee == form.Employee) {
         if (form.StartTime.getTime() >= row.StartTime.getTime() && form.StartTime.getTime() <= row.EndTime.getTime()) {
           isValid = false;
@@ -88,11 +109,22 @@ export class QuestionThreeComponent implements OnInit {
     return isValidEmployee && isValidDepartment && isValidStartDate && isValidEndDate && isValidStartTime && isValidEndTime;
   }
 
-  delete(schedule: EmployeeTableData) {
+  delete(schedule: ScheduleTableData, event) {
+    event.preventDefault();
+    event.stopPropagation();
     const index = this.tableData.indexOf(schedule);
     console.log(index);
     this.tableData.splice(index, 1);
-    this.dataSource = new MatTableDataSource(this.tableData);
+    let postSuccess = false;
+    this.dataservice.removeEntity('schedules', schedule).subscribe(value => {
+      postSuccess = value;
+    });
+    this.refreshDataSource(this.tableData);
+  }
+
+  refreshDataSource(source: ScheduleTableData[]) {
+    this.dataSource = new MatTableDataSource(source);
     this.dataSource.sort = this.sort;
   }
+
 }

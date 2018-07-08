@@ -11,10 +11,6 @@
   margin-left: -15px;
 }
 
-.fill-space {
-  flex: 1 1 auto;
-}
-
 button {
   height: 100%;
 }

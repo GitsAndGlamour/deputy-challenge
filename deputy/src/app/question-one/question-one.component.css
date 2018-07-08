@@ -10,11 +10,6 @@
   flex-direction: column;
 }
 
-.float-right {
-  float: right;
-
-}
-
 .label-link {
   color: #3caac4 !important;
 }
@@ -32,7 +27,7 @@
 
 .larger-font {
   font-size: 14px;
-  border-bottom: 1.5px solid rgba(0,0,0,0.05);
+  border-bottom: 1.5px solid #ededed;
 }
 
 .btn-group-sm {

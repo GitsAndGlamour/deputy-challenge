@@ -8,6 +8,7 @@ import { QuestionOneComponent } from './question-one/question-one.component';
 import { QuestionTwoComponent } from './question-two/question-two.component';
 import {HttpClientModule} from "@angular/common/http";
 import { QuestionThreeComponent } from './question-three/question-three.component';
+import { QuestionFourComponent } from './question-four/question-four.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { QuestionThreeComponent } from './question-three/question-three.componen
     QuestionOneComponent,
     QuestionTwoComponent,
     QuestionThreeComponent,
+    QuestionFourComponent,
   ],
   imports: [
     NgbModule.forRoot(),
