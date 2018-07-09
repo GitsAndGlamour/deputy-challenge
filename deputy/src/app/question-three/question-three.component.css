@@ -1,0 +1,16 @@
+.mat-column-actions {
+  text-align: right;
+}
+
+th.mat-header-cell:last-child {
+  padding-right: 90px;
+}
+
+.mat-column-actions button {
+  float: right;
+  margin: 5px;
+}
+
+#submit {
+  max-height: 40px;
+}

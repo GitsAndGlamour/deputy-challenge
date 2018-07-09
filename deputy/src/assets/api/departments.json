@@ -1,0 +1,42 @@
+[
+  {
+    "Id": 1,
+    "Name": "Production"
+  },
+  {
+    "Id": 2,
+    "Name": "Business Development"
+  },
+  {
+    "Id": 3,
+    "Name": "Purchasing"
+  },
+  {
+    "Id": 4,
+    "Name": "Marketing"
+  },
+  {
+    "Id": 5,
+    "Name": "Human Resources"
+  },
+  {
+    "Id": 6,
+    "Name": "Accounting & Finance"
+  },
+  {
+    "Id": 7,
+    "Name": "Legal"
+  },
+  {
+    "Id": 8,
+    "Name": "Sales"
+  },
+  {
+    "Id": 9,
+    "Name": "Training"
+  },
+  {
+    "Id": 10,
+    "Name": "Product Management"
+  }
+]

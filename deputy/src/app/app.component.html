@@ -1,0 +1,17 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<mat-toolbar color="primary">
+  <img id="logo-icon" src="assets/img/logo-icon.png">
+  <img id="logo-text" src="assets/img/logo-text.png">
+  <span class="fill-space"></span>
+  <button mat-button (click)="selectQuestion(0)">Overview</button>
+  <button mat-button (click)="selectQuestion(1)">Question 1</button>
+  <button mat-button (click)="selectQuestion(2)">Question 2</button>
+  <button mat-button (click)="selectQuestion(3)">Question 3</button>
+  <button mat-button (click)="selectQuestion(4)">Question 4</button>
+</mat-toolbar>
+
+<app-walkthrough    *ngIf="question === 0"></app-walkthrough>
+<app-question-one   *ngIf="question === 1"></app-question-one>
+<app-question-two   *ngIf="question === 2"></app-question-two>
+<app-question-three *ngIf="question === 3"></app-question-three>
+<app-question-four  *ngIf="question === 4"></app-question-four>
