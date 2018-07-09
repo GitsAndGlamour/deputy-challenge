@@ -29,7 +29,7 @@
       <mat-form-field>
         <input name="endTime" ngModel #endTime="ngModel" matInput placeholder="End Time (Ex. 23:00)" required>
       </mat-form-field>
-      <button id="submit" mat-raised-button (click)="onSubmit(f, $event)" color="primary">Submit</button>
+      <button id="submit" mat-raised-button (click)="onSubmit(f)" color="primary">Submit</button>
     </form>
   </div>
   <mat-progress-bar mode="indeterminate" *ngIf="!dataSource || dataSource.length == 0"></mat-progress-bar>
@@ -64,7 +64,7 @@
       <th mat-header-cell *matHeaderCellDef> Actions </th>
       <td mat-cell *matCellDef="let schedule">
         <button mat-raised-button color="primary">Edit</button>
-        <button mat-raised-button color="warn" (click)="delete(schedule, $event)">Delete</button>
+        <button mat-raised-button color="warn" (click)="delete(schedule)">Delete</button>
       </td>
     </ng-container>
 

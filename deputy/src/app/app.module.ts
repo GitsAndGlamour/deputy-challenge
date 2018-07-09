@@ -9,6 +9,7 @@ import { QuestionTwoComponent } from './question-two/question-two.component';
 import {HttpClientModule} from "@angular/common/http";
 import { QuestionThreeComponent } from './question-three/question-three.component';
 import { QuestionFourComponent } from './question-four/question-four.component';
+import { WalkthroughComponent } from './walkthrough/walkthrough.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { QuestionFourComponent } from './question-four/question-four.component';
     QuestionTwoComponent,
     QuestionThreeComponent,
     QuestionFourComponent,
+    WalkthroughComponent,
   ],
   imports: [
     NgbModule.forRoot(),

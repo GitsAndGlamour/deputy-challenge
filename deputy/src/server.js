@@ -28,11 +28,13 @@ app.listen(4300, function() {
             json.splice(i,1);
           }
         }
+        res.send(false);
       }
       fs.writeFile(filepath, JSON.stringify(json), 'utf8', function (werr) {if (werr) {console.log(werr); res.send(false)}
       });
       res.send(true);
     });
+    res.send(false);
   });
 
   app.route('/api/:type/:id').get(function(req, res) {
@@ -64,6 +66,5 @@ app.listen(4300, function() {
       res.send(results);
     });
   });
-
 });
 

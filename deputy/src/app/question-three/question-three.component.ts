@@ -12,19 +12,21 @@ import {DataService} from "../data.service";
   styleUrls: ['./question-three.component.css']
 })
 export class QuestionThreeComponent implements OnInit {
+  rows: number = 0;
+  employee: number;
+  department: number;
   dateStart: FormControl;
   dateEnd: FormControl;
+  startDate: string;
+  endDate: string;
+  isFormDataValid: boolean;
+  isScheduleAddValid: boolean;
+  snackbar: MatSnackBar;
 
   tableData: ScheduleTableData[] = [];
   displayedColumns: string[] = ['employee', 'department', 'start', 'end', 'actions'];
   dataSource: MatTableDataSource<ScheduleTableData>;
-  rows: number = 0;
-  schedules: ScheduleTableData[] = [];
-  employee: number;
-  department: number;
-  startDate: string;
-  endDate: string;
-  snackbar: MatSnackBar;
+
   @ViewChild(MatSort) sort: MatSort;
   constructor(snackbar: MatSnackBar, private dataservice: DataService) {
     this.snackbar = snackbar;
@@ -46,10 +48,9 @@ export class QuestionThreeComponent implements OnInit {
     });
   }
 
-  onSubmit(f: NgForm, event) {
-    event.preventDefault();
-    event.stopPropagation();
+  onSubmit(f: NgForm) {
     if (this.validateForm(f)) {
+      this.dataExists(f.value);
       const startTime = new Date (f.value.startDate.toString().substring(0, 15) + ' ' + f.value.startTime);
       const endTime = new Date (f.value.endDate.toString().substring(0, 15) + ' ' + f.value.endTime);
       f.value.StartTime = startTime;
@@ -57,39 +58,57 @@ export class QuestionThreeComponent implements OnInit {
       f.value.Id = ++this.rows;
       let data = new ScheduleTableData();
       data.serialize(f.value);
-      if (this.compareExistingTimes(data)) {
-        this.dataservice.getEntityById('users', data.Id).subscribe((user: UserData) => {
-          data.EmployeeName = user.DisplayName;
-          this.dataservice.getEntityById('departments', data.Department).subscribe((department: DepartmentData) => {
-            data.DepartmentName = department.Name;
-            let postSuccess = false;
-            this.dataservice.addEntity('schedules', data).subscribe(value => {
-              postSuccess = value;
-            });
+      this.compareExistingTimes(data);
+      if (this.isFormDataValid && this.isScheduleAddValid) {
+          let postSuccess = false;
+          this.dataservice.addEntity('schedules', data).subscribe(isSuccess => {
+            postSuccess = isSuccess;
           });
-        });
         this.tableData.unshift(data);
         this.dataSource = new MatTableDataSource(this.tableData);
         this.dataSource.sort = this.sort;
       } else {
-        this.snackbar.open('Invalid scheduling. This schedule conflicts with another schedule already set.', 'OK');
+          if (!this.isScheduleAddValid) {
+            this.snackbar.open('Invalid scheduling. This schedule conflicts with another schedule already set.', 'OK');
+          }
+          if (!this.isFormDataValid) {
+            this.snackbar.open('Invalid Employee/Department.', 'OK');
+          }
       }
     }
   }
 
-  compareExistingTimes(form: ScheduleTableData): boolean {
-    let isValid = true;
+  compareExistingTimes(form: ScheduleTableData) {
+    this.isScheduleAddValid = true;
     this.tableData.forEach((row: ScheduleTableData) => {
       if (row.Employee == form.Employee) {
         if (form.StartTime.getTime() >= row.StartTime.getTime() && form.StartTime.getTime() <= row.EndTime.getTime()) {
-          isValid = false;
+          this.isScheduleAddValid = false;
         } else if (row.StartTime.getTime() >= form.StartTime.getTime() && row.EndTime.getTime() <= form.EndTime.getTime()) {
-          isValid = false;
+          this.isScheduleAddValid = false;
         }
       }
     });
-    return isValid;
   }
+
+  dataExists(form: ScheduleTableData) {
+    this.isFormDataValid = false;
+    this.dataservice.getEntityById('users', form.Employee).subscribe((employee: UserData) => {
+      if (employee) {
+        form.EmployeeName = employee.DisplayName;
+      } else {
+        this.isFormDataValid = false;
+      }
+      this.dataservice.getEntityById('departments', form.Department).subscribe((department: DepartmentData) => {
+        if (department) {
+          form.DepartmentName = department.Name;
+        } else {
+          this.isFormDataValid = false;
+        }
+      });
+    });
+  }
+
   validateForm(form: NgForm) {
     const startTime = new Date (form.value.startDate.toString().substring(0, 15) + ' ' + form.value.startTime).getTime();
     const endTime = new Date (form.value.endDate.toString().substring(0, 15) + ' ' + form.value.endTime).getTime();
@@ -109,7 +128,7 @@ export class QuestionThreeComponent implements OnInit {
     return isValidEmployee && isValidDepartment && isValidStartDate && isValidEndDate && isValidStartTime && isValidEndTime;
   }
 
-  delete(schedule: ScheduleTableData, event) {
+  delete(schedule: ScheduleTableData) {
     event.preventDefault();
     event.stopPropagation();
     const index = this.tableData.indexOf(schedule);

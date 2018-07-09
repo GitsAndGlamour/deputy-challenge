@@ -7,7 +7,7 @@ import {Component} from '@angular/core';
 })
 
 export class AppComponent {
-  question = 1;
+  question = 0;
 
   selectQuestion(question: number) {
     this.question = question;
