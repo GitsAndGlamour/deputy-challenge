@@ -1,0 +1,22 @@
+[
+  {
+    "Id": 3,
+    "Name": "System Administrator",
+    "ParentRole": 0
+  },
+  {
+    "Id": 5,
+    "Name": "Supervisor",
+    "ParentRole": 61
+  },
+  {
+    "Id": 55,
+    "Name": "Employee",
+    "ParentRole": 5
+  },
+  {
+    "Id": 61,
+    "Name": "Location Manager",
+    "ParentRole": 3
+  }
+]

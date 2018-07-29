@@ -38,7 +38,7 @@
     </mat-menu>
   </div>
 </div>
-  <mat-progress-bar mode="indeterminate" *ngIf="!dataSource || dataSource.length == 0"></mat-progress-bar>
+  <mat-progress-bar mode="indeterminate" *ngIf="!dataSource"></mat-progress-bar>
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 user-table">
 
     <!-- Name & Access Column -->

@@ -1,5 +1,6 @@
 {
   "projects": {
-    "staging": "web-starter-kit-a47ab"
+    "staging": "web-starter-kit-a47ab",
+    "default": "deputy-challenge"
   }
 }

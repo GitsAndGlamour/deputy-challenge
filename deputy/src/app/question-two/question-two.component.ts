@@ -11,6 +11,7 @@ import {DataService} from '../data.service';
 })
 export class QuestionTwoComponent implements OnInit {
 
+  input;
   rows: number = 0;
   tableData: UserTableData[] = [];
   dataSource: MatTableDataSource<UserTableData>;
