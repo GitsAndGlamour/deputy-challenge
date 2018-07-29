@@ -49,8 +49,20 @@ export class QuestionThreeComponent implements OnInit {
   }
 
   onSubmit(f: NgForm) {
-    if (this.validateForm(f)) {
-      this.dataExists(f.value);
+    this.isFormDataValid = true;
+    this.dataservice.getEntityById('users', f.value.Employee).subscribe((employee: UserData) => {
+      if (employee) {
+        f.value.EmployeeName = employee.DisplayName;
+      } else {
+        this.isFormDataValid = false;
+      }
+      this.dataservice.getEntityById('departments', f.value.Department).subscribe((department: DepartmentData) => {
+        if (department) {
+          f.value.DepartmentName = department.Name;
+        } else {
+          this.isFormDataValid = false;
+        }
+    if (this.validateForm(f) && this.isFormDataValid) {
       const startTime = new Date (f.value.startDate.toString().substring(0, 15) + ' ' + f.value.startTime);
       const endTime = new Date (f.value.endDate.toString().substring(0, 15) + ' ' + f.value.endTime);
       f.value.StartTime = startTime;
@@ -76,6 +88,8 @@ export class QuestionThreeComponent implements OnInit {
           }
       }
     }
+      });
+    });
   }
 
   compareExistingTimes(form: ScheduleTableData) {
@@ -91,23 +105,6 @@ export class QuestionThreeComponent implements OnInit {
     });
   }
 
-  dataExists(form: ScheduleTableData) {
-    this.isFormDataValid = false;
-    this.dataservice.getEntityById('users', form.Employee).subscribe((employee: UserData) => {
-      if (employee) {
-        form.EmployeeName = employee.DisplayName;
-      } else {
-        this.isFormDataValid = false;
-      }
-      this.dataservice.getEntityById('departments', form.Department).subscribe((department: DepartmentData) => {
-        if (department) {
-          form.DepartmentName = department.Name;
-        } else {
-          this.isFormDataValid = false;
-        }
-      });
-    });
-  }
 
   validateForm(form: NgForm) {
     const startTime = new Date (form.value.startDate.toString().substring(0, 15) + ' ' + form.value.startTime).getTime();
